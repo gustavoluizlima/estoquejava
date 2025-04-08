@@ -19,22 +19,19 @@ public class Database {
 	}
 
 	public static void initDatabase() {
-		String sql = """
-				CREATE TABLE IF NOT EXISTS itens (
-					id INTEGER PRIMARY KEY AUTOINCREMENT,
-					nome TEXT NOT NULL,
-					tipo TEXT NOT NULL,
-					quantidade INTEGER NOT NULL,
-					local TEXT,
-					data_entrada TEXT
-				);
-			""";
-		
-		try(Connection conn = connect(); Statement stmt = conn.createStatement()) {
-			stmt.execute(sql);
-			System.out.println("Tabela criada ou já existente");
-		} catch (SQLException e) {
-			System.out.println("Erro ao criar table " + e.getMessage());
-		}
+	    String sql = "CREATE TABLE IF NOT EXISTS itens (" +
+	                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+	                 "nome TEXT," +
+	                 "tipo TEXT," +
+	                 "quantidade INTEGER," +
+	                 "local TEXT," +
+	                 "data_entrada TEXT)";
+
+	    try (Connection conn = connect();
+	         Statement stmt = conn.createStatement()) {
+	        stmt.execute(sql);
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao criar tabela: " + e.getMessage());
+	    }
 	}
 }
